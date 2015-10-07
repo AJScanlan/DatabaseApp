@@ -70,9 +70,23 @@ public class DatabaseHandler {
             mDatabase = null; mDBOpenHelper = null;
 
             return new Person(id, tempName, tempEmail, tempPhoneNumber);
-        } else {
-            return null;
         }
+
+        mDatabase.close(); mDBOpenHelper.close();
+        mDatabase = null; mDBOpenHelper = null;
+
+        return null;
+    }
+
+    public void removePerson(int id){
+        mDBOpenHelper = new DBOpenHelper(mContext);
+        mDatabase = mDBOpenHelper.getWritableDatabase();
+
+        mDatabase.execSQL("DELETE FROM " + DBFeederContract.PersonTable.TABLE_NAME
+                + " WHERE " + DBFeederContract.PersonTable._ID + " = " + id);
+
+        mDatabase.close(); mDBOpenHelper.close();
+        mDatabase = null; mDBOpenHelper = null;
     }
 
     public void addPerson(Person person){

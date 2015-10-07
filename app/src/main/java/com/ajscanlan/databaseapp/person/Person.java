@@ -54,4 +54,12 @@ public class Person {
     public void setID(int mID) {
         this.mID = mID;
     }
+
+    @Override
+    public String toString() {
+        return "Email='" + mEmail + '\''
+                + ", Name='" + mName + '\''
+                + ", PhoneNumber='" + mPhoneNumber + '\''
+                + ", ID=" + mID;
+    }
 }
